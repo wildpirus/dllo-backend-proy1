@@ -3,6 +3,7 @@ const routerApi = require('./routes')
 
 const app = express();
 
+app.use(express.json());
 
 /*
 const mongoose = require('mongoose');
@@ -10,7 +11,6 @@ const mongoose = require('mongoose');
 app.use(express.json());
 
 mongoose.connect(
-    "mongodb+srv://capacho:marlene@cluster0.oqd26.mongodb.net/test-db?retryWrites=true&w=majority"
     )
 .then(() => {
     console.log("Exito");
@@ -19,8 +19,8 @@ mongoose.connect(
     console.log(e)
     console.log("Jumbo")
 })
-
 */
+
 app.get('/', (req,res) => {
   res.status(200).json({});
 });

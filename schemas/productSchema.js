@@ -5,6 +5,7 @@ const name = Joi.string().min(3).max(30);
 const price = Joi.number().min(0);
 const image = Joi.string().uri();
 
+
 const createProductSchema = Joi.object({
   name: name.required(),
   price: price.required(),
@@ -21,4 +22,27 @@ const getProductSchema = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema }
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const mySchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  }
+});
+const model = mongoose.model('product',mySchema);
+
+module.exports = {
+  createProductSchema,
+  updateProductSchema,
+  getProductSchema,
+  model
+}

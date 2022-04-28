@@ -1,12 +1,20 @@
 const express = require('express');
-const cors = require('cors')
-const routerApi = require('./routes')
-
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/errorHandler')
+const cors = require('cors');
+const routerApi = require('./routes');
+const { config } = require('./config/index');
+const {
+  logErrors,
+  errorHandler,
+  boomErrorHandler
+} = require('./middlewares/errorHandler')
 
 const app = express();
 
 app.use(express.json());
+
+const db = require('./lib/mongo');
+
+//MongoLib.connect();
 /*const whitelist = ['http://localhost:8080', 'https://myapp.co'];
 const options = {
   origin: (origin, callback) => {
@@ -20,27 +28,6 @@ const options = {
 app.use(cors(options));*/
 app.use(cors());
 
-/*
-los nombres de tus bases de datos y clusters
-deben ser los mismos en el servicio de Atlas y
-en tu código.
-*/
-
-/*
-const mongoose = require('mongoose');
-
-app.use(express.json());
-
-mongoose.connect(
-    )
-.then(() => {
-    console.log("Exito");
-})
-.catch((e) => {
-    console.log(e)
-    console.log("Jumbo")
-})
-*/
 
 app.get('/', (req,res) => {
   res.status(200).json({});
@@ -52,6 +39,6 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-app.listen(3000, () => {
+app.listen(config.port, () => {
   console.log("Deployed");
 });

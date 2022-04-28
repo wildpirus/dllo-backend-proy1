@@ -1,5 +1,6 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
+const { model } = require('../schemas/productSchema');
 
 class ProductsService {
 
@@ -21,19 +22,21 @@ class ProductsService {
   }
 
   async create(data) {
-    const newProduct = {
+    /*const newProduct = {
       id: faker.datatype.uuid(),
       ...data
     }
     this.products.push(newProduct);
-    return newProduct;
+    return newProduct;*/
+    const newProduct = new model(data);
+    newProduct.save();
   }
 
   async find() {
     return new Promise((resolve, reject)=> {
       setTimeout(() => {
         resolve(this.products);
-      }, 5000);
+      }, 1000);
     });
   }
 

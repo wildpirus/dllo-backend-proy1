@@ -1,5 +1,5 @@
 # dllo-backend-proy1
-Welcome to the backend API for CADITO! \n
+Welcome to the backend API for CADITO!
 API para un clon de Amazon/MercadoLibre.
 
 ## :rocket: Getting Started

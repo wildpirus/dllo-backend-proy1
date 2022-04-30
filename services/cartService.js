@@ -21,12 +21,12 @@ class CartService {
 
   async buy(user_id){
     const productsOnCart = model.find({ user_id: user_id }).sort({ created_at: -1 });
-    await Promise.all(productsOnCart.map((product) => {
-      return historyModel.create({
-        product_id: product.product_id,
-        user_id: product.user_id
+    (await productsOnCart).map(async cart => {
+      await historyModel.create({
+        product_id: cart.product_id,
+        user_id: cart.user_id
       });
-    }));
+    });
     await model.deleteMany({ user_id: user_id });
     return {res: 'successful!'};
   }

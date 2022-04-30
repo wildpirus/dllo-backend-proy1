@@ -7,7 +7,7 @@ class HistoryService {
     const foundHistory = await model.find({ user_id: user_id })
     return foundHistory;
   }
-
+  
 }
 
 module.exports = HistoryService;

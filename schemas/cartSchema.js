@@ -11,7 +11,15 @@ const createCartSchema = Joi.object({
 });
 
 const getCartSchema = Joi.object({
-  id: id.required(),
+  user_id: user_id.required(),
+});
+
+const removeFromCartSchema = Joi.object({
+  item_id: id.required(),
+});
+
+const buyCartSchema = Joi.object({
+  user_id: user_id.required(),
 });
 
 const mongoose = require('mongoose');
@@ -31,5 +39,7 @@ const model = mongoose.model('cart',mySchema);
 module.exports = {
   createCartSchema,
   getCartSchema,
+  removeFromCartSchema,
+  buyCartSchema,
   model
 }

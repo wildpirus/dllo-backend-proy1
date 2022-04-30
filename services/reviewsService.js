@@ -9,8 +9,13 @@ class ReviewsService {
     return newReview;
   }
 
-  async find(product_id) {
-    const foundReviews =  await model.find({  product_id: product_id }).sort({ rating: -1 });
+  async findByProduct(product_id) {
+    const foundReviews =  await model.find({ product_id: product_id }).sort({ rating: -1 });
+    return foundReviews;
+  }
+
+  async findByUser(user_id) {
+    const foundReviews =  await model.find({user_id: user_id}).sort({ rating: -1 });
     return foundReviews;
   }
 

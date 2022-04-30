@@ -23,6 +23,11 @@ const getReviewSchema = Joi.object({
   id: id.required(),
 });
 
+const getReviewsSchema = Joi.object({
+  product_id: product_id,
+  user_id: user_id
+});
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mySchema = new Schema({
@@ -46,5 +51,6 @@ module.exports = {
   createReviewSchema,
   updateReviewSchema,
   getReviewSchema,
+  getReviewsSchema,
   model
 }

@@ -14,6 +14,10 @@ const getHistorySchema = Joi.object({
   id: id.required(),
 });
 
+const getHistoryByUserSchema = Joi.object({
+  user_id: user_id.required(),
+});
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mySchema = new Schema({
@@ -31,5 +35,6 @@ const model = mongoose.model('history',mySchema);
 module.exports = {
   createHistorySchema,
   getHistorySchema,
+  getHistoryByUserSchema,
   model
 }

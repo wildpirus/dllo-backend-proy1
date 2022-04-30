@@ -12,9 +12,9 @@ const app = express();
 
 app.use(express.json());
 
-const db = require('./lib/mongo');
+const mongooseConnect = require('./lib/mongo');
+mongooseConnect();
 
-//MongoLib.connect();
 /*const whitelist = ['http://localhost:8080', 'https://myapp.co'];
 const options = {
   origin: (origin, callback) => {

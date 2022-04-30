@@ -34,43 +34,40 @@ class ProductsService {
 
   async find() {
     return new Promise((resolve, reject)=> {
-      setTimeout(() => {
-        resolve(this.products);
-      }, 1000);
+      resolve(model.find())
     });
   }
 
   async findOne(id) {
-    const product = this.products.find(product => product.id === id);
-    if (!product) {
+    const foundProduct =  await model.findById(id);//this.products.find(product => product.id === id);
+    if (!foundProduct) {
       throw boom.notFound('Product not found');
     }
-    if (product.isBlock) {
+    /*if (foundProduct.isBlock) {
       throw boom.conflict('product is block');
-    }
-    return product;
+    }*/
+    return foundProduct;
   }
 
   async update(id, changes) {
-    const index = this.products.findIndex(item => item.id === id);
-    if (index === -1) {
+    const foundProduct = await model.findById(id);
+    if (!foundProduct) {
       throw boom.notFound('Product not found');
     }
-    const product = this.products[index];
-    this.products[index] = {
-      ...product,
-      ...changes
-    };
-    return this.products[index];
+    /*Object.keys(changes).map(key => {
+      foundProduct[key] = changes[key];
+    });
+    const savedProduct = await foundProduct.save();
+    return savedProduct;*/
+    return (await model.updateOne({_id: id},changes)).acknowledged;
   }
 
   async delete(id) {
-    const index = this.products.findIndex(item => item.id === id);
-    if (index === -1) {
+    const foundProduct = await model.findById(id);
+    if (!foundProduct) {
       throw boom.notFound('Product not found');
     }
-    this.products.splice(index,1);
-    return {id};
+    return await model.deleteOne({_id: id});
   }
 }
 
